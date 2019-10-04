@@ -25,3 +25,13 @@ test.survived <- test.survived[c(2,1,3,4,5,6,7,8,9,10, 11,12)]
 # Combine the 2 data frames - test and train - which is now available due to consistent size
 data.combined <- rbind(train, test.survived)
 # use the rbind function that combines the data frames by rows
+
+# to pass the structure of a given object use str function - results in console
+str(data.combined)
+# the "Survived" column is a variable of type character (due to the fact that after combining the 2 data sets there are 
+# "NaN")
+# the "PassangerId", "Pclass", "SibSp" and "Parch" are an integer type - all total numbers
+# the "Age" and "Fare" are numerical type - meaning the values can have a decimal or the cell might be empty ("NA")
+# the "Name" and "Sex" are a factor type vriables - for example in sex example there are 2 options: male and female and
+# to that the assigned factors are 2 and 1
+
