@@ -35,3 +35,13 @@ str(data.combined)
 # the "Name" and "Sex" are a factor type vriables - for example in sex example there are 2 options: male and female and
 # to that the assigned factors are 2 and 1
 
+# Pclass - that represents the class of a ticket of given passanger - is currently an integer and given the fact that in
+# some way it implies the social status of a given person it should be treated as a factor, the same story can be applied
+# to the survived values (which now are treated as character)
+
+# to adress a specific column in data frame use "$" sign and then to transform the type of variable use "as" function with
+# factor atribute
+data.combined$Pclass <- as.factor(data.combined$Pclass)
+data.combined$Survived <- as.factor(data.combined$Survived)
+
+
