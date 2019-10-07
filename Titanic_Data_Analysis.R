@@ -54,4 +54,21 @@ table(data.combined$Pclass)
 # we can see that there have been much more 3rd class passengers than any others but also that there were more 1st class
 # than the 2nd class (which may indicate why there have been so many survived passengers)
 
+# to load an additional package it has to be installed first - using install.packages function
+library(ggplot2)
+# the ggplot2 library will be helpfull with some graphical representation of data
 
+# first, the machine learning model will be trained using only train data frame, so the change of Pclass to factors also
+# has to be applied to train data frame
+train$Pclass <- as.factor(train$Pclass)
+
+# Hypothesis - check the survival rate among different class of people (assuming high class having higher survival rate)
+# use a "ggplot" function from "ggplot2" library
+ggplot(train, aes(x = Pclass, fill=factor(Survived))) + geom_bar(width = 0.5) + xlab("Pclass") + ylab("Total Count") 
++ labs(fill = "Survived")
+# ggplot takes the data as first variable (train), then the "aes" is generating the way the graph is going to look: it
+# will have an "X" axis as Pclass, the fill variable (that will be based on Survived factor - using the factor function
+# on the fly), then specifing that the chart will be a bar chart (with specific width of a bar) with labels added to X and
+# Y axes and legend labeld "Survived"
+# as suspected, assuming each class individually, the highest survival rate is for 1st class passengers, then it's going
+# down for 2nd and further down for 3rd
