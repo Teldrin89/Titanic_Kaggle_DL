@@ -44,4 +44,14 @@ str(data.combined)
 data.combined$Pclass <- as.factor(data.combined$Pclass)
 data.combined$Survived <- as.factor(data.combined$Survived)
 
+# to take a look at gross survival rate, simply printout the factors and numbers from combined data frame
+table(data.combined$Survived)
+# the train data shows that more people died than survived but the ratio is not skewed towards one or the other which
+# is good from the machine learning algorith design perspective
+
+# take a look at the distribution of pclass factor
+table(data.combined$Pclass)
+# we can see that there have been much more 3rd class passengers than any others but also that there were more 1st class
+# than the 2nd class (which may indicate why there have been so many survived passengers)
+
 
