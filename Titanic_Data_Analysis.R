@@ -92,6 +92,23 @@ data.combined[which(data.combined$Name %in% dup.names),]
 # from 4 lines in console that are results of this function it looks as these were 4 different people - no need to adjsut
 # the data frame
 
+# load the stringr library for handling of the string format variables
+library(stringr)
+
+# --Hypothesis-- is there any corelation between the Mr. or Miss. titles and the other parameters, like sbisp?
+# in the misses variable there will be stored a data extracted from data.combined using the "str_detect" checking the 
+# Name column by the title ("Miss")
+misses <- data.combined[which(str_detect(data.combined$Name, "Miss")),]
+# the next command will printout the first 6 rows of the misses data
+misses[1:6,]
+# the information that we can infere from that small data sample is that all had generaly low age, most of them survived
+# and the very youg one were most likely traveling with either sibling (sibsp = siblings/spouses) or parents 
+# (parch = parents/children)
+# checking if the "Mrs." and corelation with age
+mrses <- data.combined[which(str_detect(data.combined$Name, "Mrs.")),]
+# printout the first 6 rows
+mrses[1:6,]
+
 
 
 
