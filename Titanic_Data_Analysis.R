@@ -108,6 +108,13 @@ misses[1:6,]
 mrses <- data.combined[which(str_detect(data.combined$Name, "Mrs.")),]
 # printout the first 6 rows
 mrses[1:6,]
+# the trend for survivability seem to be continuig, the age of "Mrs." seem to be older, most traveling with probably 
+# spouse (rather than sibling)
+# checking the pattern for men - rather than looking by title, using the "sex" factor as child male may have no "Mr."
+males <- data.combined[which(train$Sex == "male"),]
+males[1:6,]
+# from the male only it looks as survival rate was extremely low (all first 6 did not survive) with variable age and most
+# in 3rd class
 
 
 
