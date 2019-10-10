@@ -62,8 +62,8 @@ library(ggplot2)
 # has to be applied to train data frame
 train$Pclass <- as.factor(train$Pclass)
 
-# Hypothesis - check the survival rate among different class of people (assuming high class having higher survival rate)
-# use a "ggplot" function from "ggplot2" library
+# --Hypothesis-- - check the survival rate among different class of people (assuming high class having higher survival 
+# rate) use a "ggplot" function from "ggplot2" library
 ggplot(train, aes(x = Pclass, fill=factor(Survived))) + geom_bar(width = 0.5) + xlab("Pclass") + ylab("Total Count") 
 + labs(fill = "Survived")
 # ggplot takes the data as first variable (train), then the "aes" is generating the way the graph is going to look: it
@@ -72,3 +72,26 @@ ggplot(train, aes(x = Pclass, fill=factor(Survived))) + geom_bar(width = 0.5) + 
 # Y axes and legend labeld "Survived"
 # as suspected, assuming each class individually, the highest survival rate is for 1st class passengers, then it's going
 # down for 2nd and further down for 3rd
+
+# to check just a sample of the portion of data frame use a "head" function - will print the first 5 rows by default
+head(as.character(train$Name))
+# since the Name has been labeld as factor in a data frame the "as" function will change on the fly variable type to
+# character for more clear presentation of the column head
+# the names seem to be formated in a specific way, as in last name, title, first name, etc.
+# to determine how many uniqe names are between both train and test data sets use a "unique" function and "length" on top
+# first treating the name as characters
+length(unique(as.character(data.combined$Name)))
+# the value is 1307 which means there are some exactly same names in the data set - now it has to be verified if the 
+# proble is a duplicate name (so eliminate) or it's just a matter of the same name (but still 2 different people)
+# extract the duplicate name data to new variable
+dup.names <- as.character(data.combined[which(duplicated(as.character(data.combined$Name))), "Name"])
+# the result shows that there are 2 names: "Kelly, Mr. James" and "Connolly, Miss. Kate" that occure twice
+# to check the whole information about the duplicated names use the same function but checking the new variable dup.names
+# against the whole data.combined iterativly and only take the data when found
+data.combined[which(data.combined$Name %in% dup.names),]
+# from 4 lines in console that are results of this function it looks as these were 4 different people - no need to adjsut
+# the data frame
+
+
+
+
