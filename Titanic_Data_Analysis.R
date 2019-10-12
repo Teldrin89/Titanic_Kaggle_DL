@@ -116,6 +116,27 @@ males[1:6,]
 # from the male only it looks as survival rate was extremely low (all first 6 did not survive) with variable age and most
 # in 3rd class
 
-
+# --Hypothesis-- expand upon the realtionship between "survived" and "pclass" byt adding the new "title" variable to the
+# data set and then explore a potential 3-dimensional relationship
+# create a utility function to help with title extraction from name variables
+extractTitle <- function(name){
+  # change the type of name variable to characters
+  name <- as.character(name)
+  # run the if statement to check which title shall be filled to which name
+  # the function "grep" check the given string against antoher (if it is in there); then if the length of that result is
+  # bigger than 1 it means it found it and returns the string
+  if(length(grep("Miss.", name))>0){
+    return("Miss.")
+  } else if(length(grep("Master."))>0){
+    return("Master.")
+  } else if(length(grep("Mrs."))>0){
+    return("Mrs.")
+  } else if(length(grep("Mr."))>0){
+    return("Mr.")
+    # return "Other" in case no title is found
+  } else {
+    return("Other")
+  }
+}
 
 
