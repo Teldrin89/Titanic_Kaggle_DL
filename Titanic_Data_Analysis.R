@@ -120,6 +120,7 @@ males[1:6,]
 # data set and then explore a potential 3-dimensional relationship
 # create a utility function to help with title extraction from name variables
 extractTitle <- function(name){
+  
   # change the type of name variable to characters
   name <- as.character(name)
   # run the if statement to check which title shall be filled to which name
@@ -127,11 +128,11 @@ extractTitle <- function(name){
   # bigger than 1 it means it found it and returns the string
   if(length(grep("Miss.", name))>0){
     return("Miss.")
-  } else if(length(grep("Master."))>0){
+  } else if(length(grep("Master.", name))>0){
     return("Master.")
-  } else if(length(grep("Mrs."))>0){
+  } else if(length(grep("Mrs.", name))>0){
     return("Mrs.")
-  } else if(length(grep("Mr."))>0){
+  } else if(length(grep("Mr.", name))>0){
     return("Mr.")
     # return "Other" in case no title is found
   } else {
@@ -139,4 +140,29 @@ extractTitle <- function(name){
   }
 }
 
+# create a tentative variable to store all the titles
+title <- NULL
+# loop over all of the values in combined data set, each time calling the new functiona and storing the data in new 
+# variable (list) that will have all test and train data; "nrow" function used to have the size of data frame (end point 
+# for iteration); "c" function used to combine values
+for(i in 1:nrow(data.combined)){
+  title <- c(title, extractTitle(data.combined[i,"Name"]))
+}
+# add the title data to combined data set and at the same time chage the type to factor
+data.combined$title <- as.factor(title)
+
+# now with the title factor added, using the ggplot it's easy to check the survival rate based on both the "Pclass" as
+# well as the "title" factor; use the aesthetic the same as before with title on X axis and filling the bars with 
+# different colors for either survived or not passengers and only for first 891 passangers (since that is the test data
+# portion)
+ggplot(data.combined[1:891,], aes(x=title, fill = factor(Survived))) +
+  # a bar chart with set bar width
+  geom_bar(width = 0.5) +
+  # use a facet_wrap function to add another layer of data - Pclass
+  facet_wrap(~Pclass) + 
+  # give the chart a title, axis labels and legend
+  ggtitle("Pclass/Titles") +
+  xlab("Title") +
+  ylab("Total count") +
+  labs(fill = "Survived")
 
